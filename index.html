@@ -45,8 +45,8 @@
 		#rectangle{
 			background-color:white;
 			width:700px;
-			display: inline-table;
-			text-align: -webkit-center;
+			display: inline-block;
+			text-align: -webkit-left;
 		}
 		/* drag objects (DIV elements inside table cells) */
 		.drag{
@@ -174,7 +174,7 @@
 	<script>
 		var N = -1;
 		tmt = null;
-		time_left = 60;
+		time_left = 30;
 		a = [];
 		b = [];
 		c = []; 
@@ -203,13 +203,13 @@
 		}
 		function redraw(pix){
 			var dy;
-			dy = a2html(a, "setCurrent", "&gt;&gt;",4,'drag');
+			dy = a2html(a, "setCurrent", "&gt;&gt;",5,'drag');
 			$("div1").innerHTML = dy;
 			dy = a2html(b, "putIn", "&gt;&gt;",pix,'drag2');
 			$("div2").innerHTML = dy;	
-			dy = a2html(c, "void", "",4,'drag');
+			dy = a2html(c, "void", "",5,'drag');
 			$("div3").innerHTML = dy;
-			dy = a2html(d, "void", "",4,'drag');
+			dy = a2html(d, "void", "",5,'drag');
 			$("div4").innerHTML = dy;
 
 
@@ -248,7 +248,7 @@
 			}
 		}
 		function reset_game(){
-			time_left = 60;
+			time_left = 30;
 			a = [0,1,2,3,4];			
 			b = [N,N,N,N,N];
 			c = [0,1,2,3,4]; // todo random
@@ -289,8 +289,8 @@
 			}
 			valor=time_left;
 			if(ok == 1){
-				redraw(4);
-				var r=confirm("Felicitaciones!!! Usted Gano con un tiempo de "+(60-valor)+"!\nSi quiere jugar de nuevo presione ACEPTAR");
+				redraw(7);
+				var r=confirm("Felicitaciones!!! Usted Gano con un tiempo de "+(30-valor)+"!\nSi quiere jugar de nuevo presione ACEPTAR");
 				if (r==true){
 					clearTimeout(tmt);
 					init();
@@ -311,9 +311,8 @@
 			if(time_left == 0){
 				alert("USTED HA PERDIDO.");
 				reset_game();
-				redraw(4);
-				$("clock_bar").style.background='#50ff50';
-				
+				redraw(7);
+				$("clock_bar").style.background='#50ff50';	
 			}
 			tmt = setTimeout(timer, 1000);
 			$("clock").innerHTML = time_left;
@@ -322,7 +321,7 @@
 		}
 		function init(){
 			reset_game();
-			redraw(4);
+			redraw(7);
 			timer();//start_
 		}
 		function restart(){
@@ -337,8 +336,8 @@
 		<h1>Memory Segmentation</h1>
 	</div>
 	<center>
-		<button onclick="init()">Empezar</button>
-		<button onclick="restart()">Reiniciar</button>
+		<button onclick="init()">start</button>
+		<button onclick="restart()">reset</button>
 		<div id=cronometro>time left:
 			<span id=clock></span>
 			<div id=clock_bar style='width:80;height:24px;background:#50ff50'>&nbsp;</div>
