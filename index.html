@@ -1,0 +1,379 @@
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no"/><!-- "position: fixed" fix for Android 2.2+ -->
+	<title>JUEGO SEGMENTACI&Oacute;N</title>
+
+	<style>
+		a:visited, a:active{
+			color:white;
+		}
+		body{
+			text-align:center;
+			font-family: arial;
+			margin: 0px; /* for IE6 / IE7 */		}
+		table{
+			float:left;
+			border-spacing:0;
+    			border-collapse:collapse;
+			border: 2px dotted #aad4ff;
+		}
+		.space{margin-left:40px}
+		td{width:50px}
+		/* drag area */
+		#drag{
+			display: table;
+			width: 100%;
+			margin: auto;
+		}
+		#head,#footer,th, #temp{
+               		/*background: url('head.jpeg');*/
+			background-color: #6699FF;
+			padding-top:10px;
+			color:white;
+		}
+		th.border{
+			border:1px solid white;
+		}
+		#head{
+			padding-left:40px;
+			height:50px;
+			font-size:9pt;
+			margin-bottom:20px;
+		}
+		#rectangle{
+			background-color:white;
+			width:600px;
+			display: inline-table;
+			text-align: -webkit-center;
+		}
+		/* drag objects (DIV elements inside table cells) */
+		.drag{
+			color: #499B33;
+			cursor: move;
+			margin: 2px;
+			z-index: 10;
+			background-color: white;
+			text-align: center;
+			font-size: 8.5pt; /* needed for cloned object */
+			opacity: 0.7;
+			filter: alpha(opacity=70);
+			/* without width, IE6/7 will not apply filter/opacity to the element ?! */
+			width: 70px;
+			height: 40px;
+			line-height: 35px;
+			/* round corners */
+			border-radius: 4px; /* Opera, Chrome */
+			-moz-border-radius: 4px; /* FF */
+		}
+		.drag:active{
+			opacity: 0.5;
+			color:white;
+			font-size:12pt;
+		}
+		.drag2{
+			color: #499B33;
+			cursor: move;
+			margin: 2px;
+			z-index: 10;
+			background-color: white;
+			text-align: center;
+			font-size: 8.5pt; /* needed for cloned object */
+			opacity: 0.7;
+			filter: alpha(opacity=70);
+			/* without width, IE6/7 will not apply filter/opacity to the element ?! */
+			line-height: 35px;
+			/* round corners */
+			border-radius: 4px; /* Opera, Chrome */
+			-moz-border-radius: 4px; /* FF */
+		}
+		.drag2:active{
+			opacity: 0.5;
+			color:white;
+			font-size:12pt;
+		}
+
+
+		/* styles for left table */
+		#table1{
+			background-color: #ccd4ff;
+			border-collapse: collapse;
+			margin-top: 0px;
+		}
+		/* border for table1 */
+		#table1 td {
+			border: 1px solid #DDC5B5;
+			height: 50px;
+			text-align: center;
+			font-size: 10pt;
+			padding: 2px;
+		}
+
+		/* green objects */
+		.green {
+		border: 2px solid #499B33;
+		}
+		.green:active{
+			border: 2px dashed white;
+			background-color: #499B33;
+		}
+		/* orange objects */
+		.orange {
+			border: 2px solid #BF6A30;
+		}
+		.orange:active{
+			border: 2px dashed white;
+			background-color: #BF6A30;
+		}
+
+		/***************** boton comenzar juego **************************************************/
+		button{
+		    	width: 120px;
+			height: 30px;
+			background: #6699FF;
+			color: #ffffff;
+			cursor: pointer;
+			border: 0px; 
+			margin-bottom:20px;
+			margin-right:5px;
+			text-transform:uppercase;
+			border-radius:20%/40%;
+			font-size:9pt;
+			font-weight:bold;
+		}
+
+		button:hover{
+			border: 2px dotted #6699FF;
+			background-color:white;
+			color:#6699FF;
+			font-size:7pt;
+		}
+	    	#cronometro {
+			padding-left: 10px;
+			color: #6A93D4;
+			height: 100px;
+			padding-top: 20px;
+			text-transform:uppercase;
+		} 
+	    	#score {
+			padding-left: 10px;
+			color: red;
+			height: 100px;
+			padding-top: 20px;
+	    	} 
+		.clock {
+			border:1px solid black;
+			margin-bottom:10px;
+			font-size:15pt;
+			color:red;
+		}
+	</style>
+	<script>
+		var N = -1;
+		tmt = null;
+		time_left = 60;
+		a = [];
+		b = [];
+		c = []; 
+		current = N;
+		function $(a){
+			return document.getElementById(a);
+		}
+		function a2html(a, f, deco, height,drag){
+			var count =0;
+			var hg ="style='height:"+height*10+"px'"; 
+			var dx = "<table id='table1'><colgroup><col width=200/></colgroup><tbody>";
+				for(var i in a){
+					h = f + "("+i+")";
+					dx += "	<tr><td><a href='#' onclick='"+h+"'><div "+hg+" class='"+drag+" green'>";
+					dx += "";
+					if(a[i] != N){
+						dx += (1 + a[i]);
+					}
+					dx += deco;
+					dx += "";
+					dx += "</div></a></td></tr>";
+					count+=1;
+				}
+			dx+="</tbody></table>";
+			return dx;
+		}
+		function redraw(pix){
+			var dy;
+			dy = a2html(a, "setCurrent", "&gt;&gt;",4,'drag');
+			$("div1").innerHTML = dy;
+			dy = a2html(b, "putIn", "&gt;&gt;",pix,'drag2');
+			$("div2").innerHTML = dy;	
+			dy = a2html(c, "void", "",4,'drag');
+			$("div3").innerHTML = dy;
+			dy = a2html(d, "void", "",4,'drag');
+			$("div4").innerHTML = dy;
+
+
+		}
+		function setCurrent(cidx){
+			current = cidx;
+		}
+		function putIn(idx){
+			//taken
+			if(b[idx] != N){
+				return;
+			}
+			//nothing
+			if(a[current] == N){
+				return;
+			}
+			b[idx] = a[current];
+			a[current] = N;
+			current = N;
+			validate_win_condition(b);
+			validate_no_possible_win_condition();
+			pix = d[idx];
+			redraw(pix);
+		}
+		function validate_no_possible_win_condition(){
+			var ok = 0;
+			for(var i in a){
+				if(a[i] != N){
+					ok = 1;
+					break;
+				}
+			}
+			if(ok == 0){
+				alert("Movio las fichas de forma incorrecta. Usted ha perdido!");
+				reset_game();
+			}
+		}
+		function reset_game(){
+			time_left = 60;
+			a = [0,1,2,3,4];			
+			b = [N,N,N,N,N];
+			c = [0,1,2,3,4]; // todo random
+			c = shuffle(c);
+			d = [0,0,0,0,0]
+			for(val in c){
+				d[val] = c[val]+getRandint(1,9); 
+			}
+			
+		}
+		function getRandint (min, max) {
+		    return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+		function rand(n){
+			return Math.floor(Math.random()*n);
+		}
+		function shuffle(c){
+			var x = 0;
+			var c1 = c;
+			while(x<100){
+				var lidx = rand(c.length);
+				var ridx = rand(c.length);
+				var temp = c1[lidx];
+				c1[lidx] = c1[ridx];
+				c1[ridx] = temp;
+				x++;
+			}
+			return c1;
+		}
+		function validate_win_condition(){
+			var ok = 1;
+			for(var i in b){
+				if(b[i] != c[i]){
+					ok=0;
+					break;
+				}
+			}
+			valor=time_left;
+			if(ok == 1){
+				redraw('');
+				var r=confirm("Felicitaciones!!! Usted Gano con un tiempo de "+(60-valor)+"!\nSi quiere jugar de nuevo presione ACEPTAR");
+				if (r==true){
+					clearTimeout(tmt);
+					init();
+				}else{ 
+					location.reload();
+					alert("GRACIAS POR PARTICIPAR.");
+				}
+
+			}
+
+		}
+		function timer(){
+			time_left--;
+			if (time_left == 10){
+				$("clock_bar").style.background='#ff5050';
+			}
+
+			if(time_left == 0){
+				alert("USTED HA PERDIDO.");
+				reset_game();
+				redraw('');
+				$("clock_bar").style.background='#50ff50';
+				
+			}
+			tmt = setTimeout(timer, 1000);
+			$("clock").innerHTML = time_left;
+			$("clock_bar").style.width = time_left*5;
+			}
+		function init(){
+			reset_game();
+			redraw('');
+			timer();//start_
+		}
+		function restart(){
+			reset_game();
+			time_left = 50;
+			redraw('');
+		}
+	</script>
+</head>
+<body>
+	<div id=head>
+		<h1>Memory Segmentation</h1>
+	</div>
+	<center>
+		<button onclick="init()">Empezar</button>
+		<button onclick="restart()">Reiniciar</button>
+		<div id=cronometro>time left:
+			<span id=clock></span>
+			<div id=clock_bar style='width:80;height:24px;background:#50ff50'>&nbsp;</div>
+		</div>
+	</center>
+	<div id=rectangle align=center>
+	<table class=space>
+	<tr><th colspan=3> Segment Table</th></tr>
+	<tr>
+		<th  class=border> Process </th>
+		<th  class=border> limit </th>
+		<th  class=border> base </th>		
+	</tr>
+
+	<tr>
+		<td>
+			<div id=div1></div>
+			<td>
+			<div id=div4></div>
+			</td>
+			<td>
+			<div id=div3></div>
+			</td>
+		</td>
+			
+		</td>
+	</tr>
+	</table>
+	<table class=space>
+	<tr>
+		<th > Physical Memory </th>
+	</tr>
+	<tr>
+		<td>
+			<div id=div2></div>
+		</td>
+	</tr>
+	</table>
+	</div>
+</body>
+</html>
+
+
+
