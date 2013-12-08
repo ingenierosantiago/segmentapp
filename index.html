@@ -34,7 +34,7 @@
 		}
 		th, th.border{
 			border:1px solid white;
-			font-size:14pt;
+			font-size:16pt;
 		}
 		#head{
 			padding-left:40px;
@@ -56,7 +56,7 @@
 			z-index: 10;
 			background-color: white;
 			text-align: center;
-			font-size: 14pt;
+			font-size: 16pt;
 			font-weight:bold;
 			opacity: 0.7;
 			filter: alpha(opacity=70);
@@ -71,7 +71,7 @@
 		.drag:active{
 			opacity: 0.5;
 			color:white;
-			font-size:12pt;
+			font-size:16pt;
 		}
 		.drag2{
 			color: #499B33;
@@ -80,7 +80,7 @@
 			z-index: 10;
 			background-color: white;
 			text-align: center;
-			font-size: 14pt;
+			font-size: 16pt;
 			font-weight:bold;
 			opacity: 0.7;
 			filter: alpha(opacity=70);
@@ -93,7 +93,7 @@
 		.drag2:active{
 			opacity: 0.5;
 			color:white;
-			font-size:12pt;
+			font-size:16pt;
 		}
 
 
@@ -108,7 +108,7 @@
 			border: 2px solid white;
 			height: 50px;
 			text-align: center;
-			font-size: 14pt;
+			font-size: 16pt;
 			padding: 2px;
 		}
 
@@ -141,7 +141,7 @@
 			margin-right:5px;
 			text-transform:uppercase;
 			border-radius:20%/40%;
-			font-size:12pt;
+			font-size:16pt;
 			font-weight:bold;
 		}
 
@@ -149,7 +149,7 @@
 			border: 2px dotted #6699FF;
 			background-color:white;
 			color:#6699FF;
-			font-size:7pt;
+			font-size:10pt;
 		}
 	    	#cronometro {
 			padding-left: 10px;
@@ -167,7 +167,7 @@
 		.clock {
 			border:1px solid black;
 			margin-bottom:10px;
-			font-size:15pt;
+			font-size:16pt;
 			color:red;
 		}
 	</style>
@@ -203,13 +203,13 @@
 		}
 		function redraw(pix){
 			var dy;
-			dy = a2html(a, "setCurrent", "&gt;&gt;",5,'drag');
+			dy = a2html(a, "setCurrent", "&gt;&gt;",7,'drag');
 			$("div1").innerHTML = dy;
 			dy = a2html(b, "putIn", "&gt;&gt;",pix,'drag2');
 			$("div2").innerHTML = dy;	
-			dy = a2html(c, "void", "",5,'drag');
+			dy = a2html(c, "void", "",7,'drag');
 			$("div3").innerHTML = dy;
-			dy = a2html(d, "void", "",5,'drag');
+			dy = a2html(d, "void", "",7,'drag');
 			$("div4").innerHTML = dy;
 
 
