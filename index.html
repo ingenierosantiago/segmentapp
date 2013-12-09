@@ -13,9 +13,11 @@
 			color:white;
 		}
 		body{
+			background: url('p.png');
 			text-align:center;
 			font-family: arial;
-			margin: 0px; /* for IE6 / IE7 */		}
+			margin: 0px;
+		}
 		table{
 			float:left;
 			border-spacing:0;
@@ -24,14 +26,12 @@
 		}
 		.space{margin-left:40px}
 		td{width:50px}
-		/* drag area */
 		#drag{
 			display: table;
 			width: 100%;
 			margin: auto;
 		}
 		#head,#footer,th, #temp{
-               		/*background: url('head.jpeg');*/
 			background-color: #6699FF;
 			padding-top:0px;
 			color:rgb(255,255,255);
@@ -47,12 +47,11 @@
 			margin-bottom:20px;
 		}
 		#rectangle{
-			background-color:white;
+			background-color:rgba(255,255,255,0);
 			width:700px;
 			display: inline-block;
 			text-align: -webkit-left;
 		}
-		/* drag objects (DIV elements inside table cells) */
 		.drag{
 			color: #499B33;
 			cursor: move;
@@ -64,14 +63,11 @@
 			font-weight:bold;
 			opacity: 0.7;
 			filter: alpha(opacity=70);
-			/* without width, IE6/7 will not apply filter/opacity to the element ?! */
 			width: 100px;
 			height: 100px;
 			line-height: 35px;
-			/* round corners */
-			border-radius: 4px; /* Opera, Chrome */
-			-moz-border-radius: 4px; /* FF */
-		}
+			border-radius: 4px; 
+			-moz-border-radius: 4px;		}
 		.drag:active{
 			opacity: 0.5;
 			color:white;
@@ -88,26 +84,20 @@
 			font-weight:bold;
 			opacity: 0.7;
 			filter: alpha(opacity=70);
-			/* without width, IE6/7 will not apply filter/opacity to the element ?! */
 			line-height: 35px;
-			/* round corners */
-			border-radius: 4px; /* Opera, Chrome */
-			-moz-border-radius: 4px; /* FF */
+			border-radius: 4px; 
+			-moz-border-radius: 4px; 
 		}
 		.drag2:active{
 			opacity: 0.5;
 			color:white;
 			font-size:16pt;
 		}
-
-
-		/* styles for left table */
 		#table1{
 			background-color: #ccd4ff;
 			border-collapse: collapse;
 			margin-top: 0px;
 		}
-		/* border for table1 */
 		#table1 td {
 			border: 2px solid white;
 			height: 50px;
@@ -115,8 +105,6 @@
 			font-size: 16pt;
 			padding: 2px;
 		}
-
-		/* green objects */
 		.green {
 		border: 2px solid #499B33;
 		}
@@ -124,7 +112,6 @@
 			border: 2px dashed white;
 			background-color: #499B33;
 		}
-		/* orange objects */
 		.orange {
 			border: 2px solid #BF6A30;
 		}
@@ -133,7 +120,7 @@
 			background-color: #BF6A30;
 		}
 
-		/***************** boton comenzar juego **************************************************/
+		/***************** botones **************************************************/
 		button{
 		    	width: 140px;
 			height: 40px;
